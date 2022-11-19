@@ -13,7 +13,7 @@ bounce.penup()
 
 #Bouncing loop for turtle. Only bounces if the turtle touches the edges of the window.
 while True:
-    bounce.forward(5)
+    bounce.forward(6)
     if (bounce.xcor() > 320):
         bounce.setheading(135)
     elif (bounce.xcor() < -330):
