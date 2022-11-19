@@ -2,7 +2,7 @@
 import turtle as trtl
 bounce = trtl.Turtle()
 wn = trtl.Screen()
-wn.bgcolor("blue")
+wn.bgcolor("powder blue")
 
 
 #RED BALL
