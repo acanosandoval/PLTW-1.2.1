@@ -7,7 +7,7 @@ wn.bgcolor("blue")
 
 #RED BALL
 #Setting up turtle
-bounce.shape("circle")
+bounce.shape("turtle")
 bounce.color("red")
 bounce.penup()
 
