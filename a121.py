@@ -8,7 +8,7 @@ wn.bgcolor("blue")
 #RED BALL
 #Setting up turtle
 bounce.shape("turtle")
-bounce.color("green")
+bounce.color("light green")
 bounce.penup()
 
 #Bouncing loop for turtle. Only bounces if the turtle touches the edges of the window.
