@@ -77,11 +77,9 @@ winner.penup()
 winner.goto(-340, 40)
 
 #-----images-------
-minionW = "minions_happy.gif"
-wn.addshape(minionW)
-minionW = trtl.Turtle(shape=minionW)
-'''
-wn.addshape(minions_laughing.gif)'''
+minionW = trtl.Turtle()
+wn.addshape("minions_happy.gif")
+minionW.shape("minions_happy.gif")
 
 #-----game functions--------
 def countdown():
