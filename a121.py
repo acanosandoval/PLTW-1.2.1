@@ -2,6 +2,7 @@
 #-----import statements-----
 import turtle as trtl
 import random as rand
+wn = trtl.Screen()
 
 #-----ben box limits background (additional custom code)----
 box_limits = trtl.Turtle()
@@ -17,14 +18,15 @@ box_limits.goto(-325, -300)
 box_limits.goto(-325, 150)
 box_limits.end_fill()
 
-'''#MAKE NMBRS OLD LACE'''
-
 #-----game configuration----
 ben_color = "sea green"
 ben_size = 1.5
 ben_shape = "circle"
 score = 0
-font_setup = ("Arial", 80, "normal")
+font_setup = ("Courier", 80, "normal")
+font_header_setup = ("Courier", 40, "normal")
+font_loser_setup = ("Courier", 75, "normal")
+font_winner_setup = ("Courier", 125, "normal")
 timer = 15
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
@@ -36,15 +38,50 @@ ben.shapesize(ben_size)
 ben.shape(ben_shape)
 ben.penup()
 
+pointheader =  trtl.Turtle()
+pointheader.hideturtle()
+pointheader.penup()
+pointheader.goto(-150, 295)
+pointheader.write("15 PTS TO WIN", font=font_header_setup)
+
+score_header =  trtl.Turtle()
+score_header.hideturtle()
+score_header.penup()
+score_header.goto(-195, 260)
+score_header.write("SCORE", font=font_header_setup)
+
 score_writer = trtl.Turtle()
 score_writer.hideturtle()
 score_writer.penup()
 score_writer.goto(-200, 180)
 
+counter_header =  trtl.Turtle()
+counter_header.hideturtle()
+counter_header.penup()
+counter_header.goto(105, 260)
+counter_header.write("TIMER", font=font_header_setup)
+
 counter =  trtl.Turtle()
 counter.hideturtle()
 counter.penup()
 counter.goto(100, 180)
+
+loser = trtl.Turtle()
+loser.hideturtle()
+loser.penup()
+loser.goto(-340, 10)
+
+winner = trtl.Turtle()
+winner.hideturtle()
+winner.penup()
+winner.goto(-340, 40)
+
+#-----images-------
+minionW = "minions_happy.gif"
+wn.addshape(minionW)
+minionW = trtl.Turtle(shape=minionW)
+'''
+wn.addshape(minions_laughing.gif)'''
 
 #-----game functions--------
 def countdown():
@@ -76,10 +113,20 @@ def ben_clicked(x,y):
         change_position()
     elif timer_up == (True):
         ben.hideturtle()
+        wn.clear()
+        score_header.goto(-75, 260)
+        score_writer.goto(-40, 180)
+        score_header.write("SCORE", font=font_header_setup)
+        score_writer.write(score, font=font_setup)
+        if score >= 15:
+            wn.bgcolor("light green")
+            winner.write("W YOU WON", font=font_winner_setup)
+        elif score < 15:
+            wn.bgcolor("red")
+            winner.write("L BOZO YOU LOST", font=font_loser_setup)
 
 #-----events----------------
 ben.onclick(ben_clicked)
-wn = trtl.Screen()
 wn.bgcolor("old lace")
 wn.ontimer(countdown, counter_interval) 
 wn.mainloop()
