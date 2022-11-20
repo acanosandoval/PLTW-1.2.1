@@ -3,6 +3,7 @@
 import turtle as trtl
 import random as rand
 wn = trtl.Screen()
+wn.bgcolor("old lace")
 
 #-----ben box limits background (additional custom code)----
 box_limits = trtl.Turtle()
@@ -76,17 +77,11 @@ winner.hideturtle()
 winner.penup()
 winner.goto(-340, 40)
 
-#-----images-------
-minionW = trtl.Turtle()
-wn.addshape("minions_happy.gif")
-minionW.shape("minions_happy.gif")
-
 #-----game functions--------
 def countdown():
   global timer, timer_up
   counter.clear()
   if timer <= 0:
-    counter.write("Time's Up", font=font_setup)
     timer_up = True
   else:
     counter.write(str(timer), font=font_setup)
@@ -106,10 +101,10 @@ def update_score():
     
 def ben_clicked(x,y):
     global timer
-    if timer_up == (False):
+    if timer_up == False:
         update_score()
         change_position()
-    elif timer_up == (True):
+    if timer_up == True:
         ben.hideturtle()
         wn.clear()
         score_header.goto(-75, 260)
@@ -125,6 +120,5 @@ def ben_clicked(x,y):
 
 #-----events----------------
 ben.onclick(ben_clicked)
-wn.bgcolor("old lace")
 wn.ontimer(countdown, counter_interval) 
 wn.mainloop()
