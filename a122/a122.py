@@ -6,20 +6,6 @@ import leaderboard as lb
 wn = trtl.Screen()
 wn.bgcolor("old lace")
 
-#-----ben box limits background (additional custom code)----
-box_limits = trtl.Turtle()
-box_limits.hideturtle()
-box_limits.penup()
-box_limits.goto(-325, 150)
-box_limits.pendown()
-box_limits.fillcolor("navajo white")
-box_limits.begin_fill()
-box_limits.goto(325, 150)
-box_limits.goto(325, -300)
-box_limits.goto(-325, -300)
-box_limits.goto(-325, 150)
-box_limits.end_fill()
-
 #-----game configuration----
 ben_color = "sea green"
 ben_size = 1.5
@@ -36,6 +22,20 @@ timer_up = False
 #-----leaderboard variables-----
 leaderboard_file_name = "a122_leaderboard.txt"
 player_name = input("Player name: ")
+
+#-----ben box limits background (additional custom code)----
+box_limits = trtl.Turtle()
+box_limits.hideturtle()
+box_limits.penup()
+box_limits.goto(-325, 150)
+box_limits.pendown()
+box_limits.fillcolor("navajo white")
+box_limits.begin_fill()
+box_limits.goto(325, 150)
+box_limits.goto(325, -300)
+box_limits.goto(-325, -300)
+box_limits.goto(-325, 150)
+box_limits.end_fill()
 
 #-----initialize turtle-----
 ben = trtl.Turtle()
