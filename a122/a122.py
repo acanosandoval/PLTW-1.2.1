@@ -20,7 +20,7 @@ counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 
 #-----leaderboard variables-----
-leaderboard_file_name = "a122_leaderboard.txt"
+leaderboard_file_name = "a122/a122_leaderboard.txt"
 player_name = input("Player name: ")
 
 #-----ben box limits background (additional custom code)----
@@ -47,8 +47,8 @@ ben.penup()
 pointheader =  trtl.Turtle()
 pointheader.hideturtle()
 pointheader.penup()
-pointheader.goto(-150, 295)
-pointheader.write("15 PTS TO WIN", font=font_header_setup)
+pointheader.goto(-160, 295)
+pointheader.write("CATCH-A-TURTLE", font=font_header_setup)
 
 score_header =  trtl.Turtle()
 score_header.hideturtle()
