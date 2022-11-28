@@ -21,13 +21,15 @@ def get_names(file_name):
     while (line[index] != ","):
       leader_name = leader_name + line[index] 
       index = index + 1
-
+    print("leader name: ", leader_name)
+    
     # TODO 2: add the player name to the names list
+    names.append(leader_name)
 
   leaderboard_file.close()
 
   #  TODO 6: return the names list in place of the empty list
-  return []
+  return names
 
   
 # return scores from the leaderboard file
@@ -40,15 +42,23 @@ def get_scores(file_name):
     index = 0
 
     # TODO 3: use a while loop to index beyond the comma, skipping the player's name
-
+    while (line[index] != ","):
+      index = index + 1
+    index = index + 1
+    
     # TODO 4: use a while loop to get the score
+    while (line[index] != "\n"):
+      leader_score = leader_score + line[index] 
+      index = index + 1
+    print("leader score: ", leader_score)
 
     # TODO 5: add the player score to the scores list
+    scores.append(int(leader_score))
    
   leaderboard_file.close()
 
   # TODO 7: return the scores in place of the empty list
-  return []
+  return scores
 
 
 # update leaderboard by inserting the current player and score to the list at the correct position
@@ -56,14 +66,12 @@ def update_leaderboard(file_name, leader_names, leader_scores,  player_name, pla
 
   index = 0
   # TODO 8: loop through all the scores in the existing leaderboard list
-  '''
-  for   :
+  for line in file_name:
     # TODO 9: check if this is the position to insert new score at
     if ():
       break
     else:
       index = index + 1
-  '''
   
   # TODO 10: insert new player and score
 
@@ -86,7 +94,7 @@ def update_leaderboard(file_name, leader_names, leader_scores,  player_name, pla
 def draw_leaderboard(high_scorer, leader_names, leader_scores, turtle_object, player_score):
   
   # clear the screen and move turtle object to (-200, 100) to start drawing the leaderboard
-  font_setup = ("Arial", 20, "normal")
+  font_setup = ("Courier", 20, "normal")
   turtle_object.clear()
   turtle_object.penup()
   turtle_object.goto(-160,100)
