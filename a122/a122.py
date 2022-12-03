@@ -15,7 +15,7 @@ font_setup = ("Courier", 80, "normal")
 font_header_setup = ("Courier", 40, "normal")
 font_loser_setup = ("Courier", 75, "normal")
 font_winner_setup = ("Courier", 125, "normal")
-timer = 5
+timer = 30
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 
