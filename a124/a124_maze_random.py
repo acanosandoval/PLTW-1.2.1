@@ -1,43 +1,46 @@
 #   a124_maze_spiral.py
-#----initial setup----
+#----INITIAL SETUP----
 import turtle as trtl
 import random as rand
 wn = trtl.Screen()
 
-#----configuration variables setup----
+#----VARIABLES SETUP----
 num_of_walls = 5 * 5
 wall_length = 50
 path_width = 12
 wall_color = "black"
 wall_count = 1
 
-#----maze pen actions----
+#----MAZE PEN SETUP----
 wall_pen = trtl.Turtle()
 wall_pen.hideturtle()
 wall_pen.pensize(4)
 wall_pen.speed(0)
 wall_pen.color(wall_color)
 
-  #---drawing walls---
+#---DRAWING THE MAZE---
 for r in range(num_of_walls):
-  #---variable setup---
+  #---random door and barrier setup---
   door = rand.randint(path_width*2, (wall_length - path_width*2))
   barrier = rand.randint(path_width*2, (wall_length - path_width*2))
   
-  #---skips over first 4 walls in else---
+  #---skip over first 4 walls---
   if wall_count > 4:
     wall_pen.pendown()
+    while abs(door - barrier) < path_width*2:
+      door = rand.randint(path_width*2, (wall_length - path_width*2))
   else:
     wall_pen.penup()
   
   wall_pen.left(90)
 
+#if door comes first
   if (door < barrier):
-    print("door < barrier")
+    #---draws doors---
     wall_pen.forward(door)
-    wall_pen.penup() #---draws doors---
+    wall_pen.penup()
     wall_pen.forward(path_width*2)
-    if wall_count > 4: #cont. of 4 wall skip
+    if wall_count > 4:
       wall_pen.pendown()
     #---draws barriers---
     wall_pen.forward(barrier - door - path_width*2)
@@ -47,24 +50,27 @@ for r in range(num_of_walls):
     wall_pen.right(90)
     wall_pen.forward(wall_length - barrier)
 
+    #---final variable changes---
     wall_length = wall_length + path_width
     wall_count = wall_count + 1
+#if barrier comes first
   else:
-    print("door > barrier")
+    #---draws barriers---
     wall_pen.forward(barrier)
     wall_pen.left(90)
     wall_pen.forward(path_width*2)
     wall_pen.back(path_width*2)
     wall_pen.right(90)
     
+    #---draws doors---
     wall_pen.forward(door - barrier)
-    wall_pen.penup() #---draws doors---
+    wall_pen.penup()
     wall_pen.forward(path_width*2)
-    if wall_count > 4: #cont. of 4 wall skip
+    if wall_count > 4:
       wall_pen.pendown()
-    
     wall_pen.forward(wall_length - door - path_width*2)
 
+    #---final variable changes---
     wall_length = wall_length + path_width
     wall_count = wall_count + 1
 
