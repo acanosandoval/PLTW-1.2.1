@@ -35,14 +35,17 @@ for r in range(num_of_walls):
   
   wall_pen.left(90)
 
+def draw_doors(vald):
+  wall_pen.forward(vald)
+  wall_pen.penup()
+  wall_pen.forward(path_width*2)
+  if wall_count > 4:
+    wall_pen.pendown()
+
 #if door comes first
   if (door < barrier):
     #---draws doors---
-    wall_pen.forward(door)
-    wall_pen.penup()
-    wall_pen.forward(path_width*2)
-    if wall_count > 4:
-      wall_pen.pendown()
+    draw_doors(door)
     #---draws barriers---
     wall_pen.forward(barrier - door - path_width*2)
     wall_pen.left(90)
@@ -64,11 +67,7 @@ for r in range(num_of_walls):
     wall_pen.right(90)
     
     #---draws doors---
-    wall_pen.forward(door - barrier)
-    wall_pen.penup()
-    wall_pen.forward(path_width*2)
-    if wall_count > 4:
-      wall_pen.pendown()
+    draw_doors(door - barrier)
     wall_pen.forward(wall_length - door - path_width*2)
 
     #---final variable changes---
