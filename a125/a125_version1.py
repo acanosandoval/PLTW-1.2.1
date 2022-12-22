@@ -11,8 +11,6 @@ font_header_setup = ("Courier", 40, "normal")
 timer = 30
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
-game_over = False
-level = 1
 
 #-----leaderboard variables-----
 leaderboard_file_name = "a125/a125_leaderboard.txt"
@@ -71,27 +69,26 @@ def initial_game_setup():
     fish.penup()
     fish.goto(0, -245)
 
-def level1():
+def game():
     #boat setup
     boat_image = "a125/boat.gif"
     wn.addshape(boat_image) #size: 160x160
     #draws boats randomly
     #moves boat down
-    if timer_up == False:
-        for r in range(50):
-            boat1 = trtl.Turtle()
-            boat1.shape(boat_image)
-            boat1.penup()
-            boat1x = rand.randint(-80, 80)
-            boat_speed = rand.randint(5, 10)
-            boat1.goto(boat1x, 70)
-            boat1.speed(boat_speed)
-            boat1.setheading(270)
-            boat1.forward(290)
-            boat1.clear()
+    while timer_up == False:
+        boat1 = trtl.Turtle()
+        boat1.shape(boat_image)
+        boat1.penup()
+        boat1x = rand.randint(-80, 80)
+        boat_speed = rand.randint(1, 5)
+        boat1.goto(boat1x, 70)
+        boat1.speed(boat_speed)
+        boat1.setheading(270)
+        boat1.forward(290)
+        boat1.hideturtle()
 
 
-def countdown():
+'''def countdown():
   global timer, timer_up
   counter.clear()
   if timer <= 0:
@@ -101,7 +98,7 @@ def countdown():
   else:
     counter.write(str(timer), font=font_setup)
     timer -= 1
-    counter.getscreen().ontimer(countdown, counter_interval)
+    counter.getscreen().ontimer(countdown, counter_interval)'''
     
 def update_score():
     global score
@@ -126,7 +123,7 @@ def manage_leaderboard():
 
 #-----other events-------------
 initial_game_setup()
-level1()
+game()
 
 wn.ontimer(countdown, counter_interval) 
 
