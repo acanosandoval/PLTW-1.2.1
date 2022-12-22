@@ -4,15 +4,6 @@ import turtle as trtl
 import random as rand
 import leaderboard as lb
 wn = trtl.Screen()
-wn.bgcolor("forest green")
-
-#-----fish turtle----
-'''fish_image = "a125/fish.gif"
-wn.addshape(fish_image)
-fish = trtl.Turtle()
-fish.shape(fish_image)
-fish.turtlesize = 0.5'''
-
 
 score = 0
 font_setup = ("Courier", 80, "normal")
@@ -20,98 +11,107 @@ font_header_setup = ("Courier", 40, "normal")
 timer = 30
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
+game_over = False
+level = 1
 
 #-----leaderboard variables-----
 leaderboard_file_name = "a125/a125_leaderboard.txt"
 player_name = input("Player name: ")
 
-#-----river----
-river = trtl.Turtle()
-river.hideturtle()
-river.penup()
-river.goto(-325, 150)
-river.pendown()
-river.fillcolor("dodger blue")
-river.begin_fill()
-river.goto(325, 150)
-river.goto(325, -300)
-river.goto(-325, -300)
-river.goto(-325, 150)
-river.end_fill()
-
-pointheader =  trtl.Turtle()
-pointheader.hideturtle()
-pointheader.penup()
-pointheader.goto(-160, 295)
-pointheader.write("CATCH-A-TURTLE", font=font_header_setup)
-
-score_header =  trtl.Turtle()
-score_header.hideturtle()
-score_header.penup()
-score_header.goto(-195, 260)
-score_header.write("SCORE", font=font_header_setup)
-
-score_writer = trtl.Turtle()
-score_writer.hideturtle()
-score_writer.penup()
-score_writer.goto(-200, 180)
-
-counter_header =  trtl.Turtle()
-counter_header.hideturtle()
-counter_header.penup()
-counter_header.goto(105, 260)
-counter_header.write("TIMER", font=font_header_setup)
-
-counter =  trtl.Turtle()
-counter.hideturtle()
-counter.penup()
-counter.goto(100, 180)
-
-loser = trtl.Turtle()
-loser.hideturtle()
-loser.penup()
-loser.goto(-340, 10)
-
-winner = trtl.Turtle()
-winner.hideturtle()
-winner.penup()
-winner.goto(-340, 40)
-
 #-----game functions--------
+def initial_game_setup():
+    #bckgd color
+    wn.bgcolor("forest green")
+    #-----draws river----
+    river = trtl.Turtle()
+    river.hideturtle()
+    river.penup()
+    river.goto(-160, 150)
+    river.pendown()
+    river.fillcolor("dodger blue")
+    river.begin_fill()
+    river.goto(160, 150)
+    river.goto(160, -300)
+    river.goto(-160, -300)
+    river.goto(-160, 150)
+    river.end_fill()
+    #-----writes game title----
+    game_title =  trtl.Turtle()
+    game_title.hideturtle()
+    game_title.penup()
+    game_title.goto(-160, 295)
+    game_title.write("RAPID RIVER", font=font_header_setup)
+    #-----writers score header----
+    score_header =  trtl.Turtle()
+    score_header.hideturtle()
+    score_header.penup()
+    score_header.goto(-195, 260)
+    score_header.write("SCORE", font=font_header_setup)
+    #-----writes score----
+    score_writer = trtl.Turtle()
+    score_writer.hideturtle()
+    score_writer.penup()
+    score_writer.goto(-200, 180)
+    #-----writes countdown header----
+    counter_header =  trtl.Turtle()
+    counter_header.hideturtle()
+    counter_header.penup()
+    counter_header.goto(105, 260)
+    counter_header.write("TIMER", font=font_header_setup)
+    #-----writers countdown----
+    counter =  trtl.Turtle()
+    counter.hideturtle()
+    counter.penup()
+    counter.goto(100, 180)
+    #-----fish turtle----
+    fish_image = "a125/fish.gif"
+    wn.addshape(fish_image) #size: 70x70
+    fish = trtl.Turtle()
+    fish.shape(fish_image)
+    fish.penup()
+    fish.goto(0, -245)
+
+def level1():
+    #boat setup
+    boat_image = "a125/boat.gif"
+    wn.addshape(boat_image) #size: 160x160
+    #draws boats randomly
+    #moves boat down
+    if timer_up == False:
+        for r in range(50):
+            boat1 = trtl.Turtle()
+            boat1.shape(boat_image)
+            boat1.penup()
+            boat1x = rand.randint(-80, 80)
+            boat_speed = rand.randint(5, 10)
+            boat1.goto(boat1x, 70)
+            boat1.speed(boat_speed)
+            boat1.setheading(270)
+            boat1.forward(290)
+            boat1.clear()
+
+
 def countdown():
   global timer, timer_up
   counter.clear()
   if timer <= 0:
     timer_up = True
-    manage_leaderboard()
+    if level == 1:
+        #enter code hereeeeeee for level 1
   else:
     counter.write(str(timer), font=font_setup)
     timer -= 1
     counter.getscreen().ontimer(countdown, counter_interval)
-
-def change_position():
-    new_xpos = rand.randint(-290, 290)
-    new_ypos = rand.randint(-265, 115)
-    ben.goto(new_xpos,new_ypos)
     
 def update_score():
     global score
     score +=1
     score_writer.clear()
     score_writer.write(score, font=font_setup)
-    
-def ben_clicked(x,y):
-    global timer
-    if timer_up == False:
-        update_score()
-        change_position()
-    if timer_up == True:
-        ben.hideturtle()
 
 def manage_leaderboard():
-
   global score
-  global ben
+  global fish
 
   # get the names and scores from the leaderboard file
   leader_names_list = lb.get_names(leaderboard_file_name)
@@ -120,14 +120,14 @@ def manage_leaderboard():
   # show the leaderboard with or without the current player
   if (len(leader_scores_list) < 5 or score >= leader_scores_list[4]):
     lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
-    lb.draw_leaderboard(True, leader_names_list, leader_scores_list, ben, score)
-
+    lb.draw_leaderboard(True, leader_names_list, leader_scores_list, fish, score)
   else:
-    lb.draw_leaderboard(False, leader_names_list, leader_scores_list, ben, score)
+    lb.draw_leaderboard(False, leader_names_list, leader_scores_list, fish, score)
 
-#-----events----------------
-ben.onclick(ben_clicked)
+#-----other events-------------
+initial_game_setup()
+level1()
+
 wn.ontimer(countdown, counter_interval) 
-wn.mainloop()
 
 wn.mainloop()
