@@ -9,10 +9,10 @@ wn = trtl.Screen()
 score = 0
 font_setup = ("Courier", 80, "normal")
 font_header_setup = ("Courier", 40, "normal")
-timer = 45
+timer = 5
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
-leaderboard_file_name = "a125/a125_leaderboard.txt"
+leaderboard_file_name = "a125/125_leaderboard.txt"
 #FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 '''player_name = input("Player name: ")'''
 player_name = "TEST"
@@ -112,6 +112,7 @@ def countdown():
   counter.clear()
   if timer <= 0:
     timer_up = True
+    wn.clear()
     manage_leaderboard()
   else:
     counter.write(str(timer), font=font_setup)
