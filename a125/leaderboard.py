@@ -1,11 +1,6 @@
 # leaderboard.py
 # The leaderboard module to be used in Activity 1.2.2
 
-# set the levels of scoring
-bronze_score = 15
-silver_score = 20
-gold_score = 25
-
 # return names in the leaderboard file
 def get_names(file_name):
   leaderboard_file = open(file_name, "r")  # be sure you have created this
@@ -21,7 +16,6 @@ def get_names(file_name):
     while (line[index] != ","):
       leader_name = leader_name + line[index] 
       index = index + 1
-    print("leader name: ", leader_name)
     
     # TODO 2: add the player name to the names list
     names.append(leader_name)
@@ -50,7 +44,6 @@ def get_scores(file_name):
     while (line[index] != "\n"):
       leader_score = leader_score + line[index] 
       index = index + 1
-    print("leader score: ", leader_score)
 
     # TODO 5: add the player score to the scores list
     scores.append(int(leader_score))
@@ -126,11 +119,3 @@ def draw_leaderboard(high_scorer, leader_names, leader_scores, turtle_object, pl
   turtle_object.penup()
   turtle_object.goto(-160,int(turtle_object.ycor())-50)
   turtle_object.pendown()
-  
-  # TODO 15: Display a gold/silver/bronze message if player earned a gold/silver/or bronze medal; display nothing if no medal
-  if (player_score >= gold_score):
-    turtle_object.write("You earned a gold medal!", font=font_setup)
-  elif (player_score >= silver_score and player_score < gold_score):
-    turtle_object.write("You earned a silver medal!", font=font_setup)
-  elif (player_score >= bronze_score and player_score < silver_score):
-    turtle_object.write("You earned a bronze medal!", font=font_setup)

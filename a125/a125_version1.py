@@ -9,13 +9,11 @@ wn = trtl.Screen()
 score = 0
 font_setup = ("Courier", 80, "normal")
 font_header_setup = ("Courier", 40, "normal")
-timer = 5
+timer = 15
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 leaderboard_file_name = "a125/125_leaderboard.txt"
-#FOR TESTING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-'''player_name = input("Player name: ")'''
-player_name = "TEST"
+player_name = input("Player name: ")
 
 #-----background color----
 wn.bgcolor("forest green")
@@ -37,9 +35,9 @@ river.end_fill()
 game_title = trtl.Turtle()
 game_title.hideturtle()
 game_title.penup()
-game_title.goto(-160, 295)
+game_title.goto(-135, 295)
 game_title.write("RAPID RIVER", font=font_header_setup)
-#-----writers score header----
+#-----writes score header----
 score_header =  trtl.Turtle()
 score_header.hideturtle()
 score_header.penup()
@@ -75,37 +73,34 @@ def game():
   #boat setup
   boat_image = "a125/boat.gif"
   wn.addshape(boat_image) #size: 80x128
-  
-  global boat
-  
   boat = trtl.Turtle()
   boat.hideturtle()
   boat.shape(boat_image)
   boat.penup()
   boat.setheading(270)
-  
+  #draws boats, moves them, and erases them in a loop
   while timer_up == False:
-      #draws boats, moves them, and erases them in a loop
-      boatx = rand.randint(-110, 110)
-      boat_speed = rand.randint(0, 2)
-      boat.goto(boatx, 80)
-      boat.speed(boat_speed)
-      boat.showturtle()
-      boat.forward(500)
-      boat.hideturtle()
-      if boat.ycor() < -245:
-        if (abs(boat.xcor() - fish.xcor()) < 35):
-          game_over()
-        else: 
-          update_score()
-          
-      if game_over == True:
-        wn.clear()
+    boatx = rand.randint(-110, 110)
+    boat_speed = rand.randint(0, 2)
+    boat.goto(boatx, 80)
+    boat.speed(boat_speed)
+    boat.showturtle()
+    boat.forward(450)
+    boat.hideturtle()
+    #if the boat is lower than the fish AND touching the fish, game is over
+    if int(boat.ycor()) < int(-245):
+      if (abs(boat.xcor() - fish.xcor()) < 35):
+        game_over()
+      else:
+        update_score()
+    else:
+      update_score()
 
 def game_over():
   global timer, timer_up
   timer_up = True
   timer = 0
+  score_writer.write(score, font=font_setup)
 
 def countdown():
   global timer, timer_up
@@ -113,6 +108,7 @@ def countdown():
   if timer <= 0:
     timer_up = True
     wn.clear()
+    score_writer.penup()
     manage_leaderboard()
   else:
     counter.write(str(timer), font=font_setup)
@@ -120,10 +116,10 @@ def countdown():
     counter.getscreen().ontimer(countdown, counter_interval)
     
 def update_score():
-    global score
-    score +=10
-    score_writer.clear()
-    score_writer.write(score, font=font_setup)
+  global score
+  score +=10
+  score_writer.clear()
+  score_writer.write(score, font=font_setup)
 
 def manage_leaderboard():
   global score, fish
@@ -144,12 +140,10 @@ def left_key():
   fish.setheading(180)
   fish.forward(15)
 
-
 #-----other events-------------
 wn.listen()
 wn.onkeypress(right_key, "Right")
 wn.onkeypress(left_key, "Left")
-
 wn.ontimer(countdown, counter_interval) 
 game()
 
