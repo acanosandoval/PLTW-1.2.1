@@ -3,7 +3,6 @@
 import turtle as trtl
 import random as rand
 import leaderboard as lb
-wn = trtl.Screen()
 
 #------variables------
 score = 0
@@ -14,6 +13,8 @@ counter_interval = 1000   #1000 represents 1 second
 timer_up = False
 leaderboard_file_name = "a125/125_leaderboard.txt"
 player_name = input("Player name: ")
+
+wn = trtl.Screen()
 
 #-----background color----
 wn.bgcolor("forest green")
