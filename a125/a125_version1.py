@@ -69,38 +69,50 @@ fish.shape(fish_image)
 fish.penup()
 fish.goto(0, -245)
 
-
-#------adds score if fish avoids boat-----
-def fishwinscore():
-    score = 0#ADD CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
-
 #------functions------
 def game():
-    #boat setup
-    boat_image = "a125/boat.gif"
-    wn.addshape(boat_image) #size: 80x128
-    
-    boat = trtl.Turtle()
-    boat.hideturtle()
-    boat.shape(boat_image)
-    boat.penup()
-    boat.setheading(270)
-    while timer_up == False:
-        #draws boats, moves them, and erases them in a loop
-        boatx = rand.randint(-110, 110)
-        boat_speed = rand.randint(0, 2)
-        boat.goto(boatx, 80)
-        boat.speed(boat_speed)
-        boat.showturtle()
-        boat.forward(500)
-        boat.hideturtle()
+  global timer_up
+  #boat setup
+  boat_image = "a125/boat.gif"
+  wn.addshape(boat_image) #size: 80x128
+  
+  global boat
+  
+  boat = trtl.Turtle()
+  boat.hideturtle()
+  boat.shape(boat_image)
+  boat.penup()
+  boat.setheading(270)
+  
+  while timer_up == False:
+      #draws boats, moves them, and erases them in a loop
+      boatx = rand.randint(-110, 110)
+      boat_speed = rand.randint(0, 2)
+      boat.goto(boatx, 80)
+      boat.speed(boat_speed)
+      boat.showturtle()
+      boat.forward(500)
+      boat.hideturtle()
+      if boat.ycor() < -245:
+        if (abs(boat.xcor() - fish.xcor()) < 35):
+          game_over()
+        else: 
+          update_score()
+          
+      if game_over == True:
+        wn.clear()
+
+def game_over():
+  global timer, timer_up
+  timer_up = True
+  timer = 0
 
 def countdown():
   global timer, timer_up
   counter.clear()
   if timer <= 0:
     timer_up = True
-    manage_leaderboard
+    manage_leaderboard()
   else:
     counter.write(str(timer), font=font_setup)
     timer -= 1
@@ -114,20 +126,29 @@ def update_score():
 
 def manage_leaderboard():
   global score, fish
-
   # get the names and scores from the leaderboard file
   leader_names_list = lb.get_names(leaderboard_file_name)
   leader_scores_list = lb.get_scores(leaderboard_file_name)
-
   # show the leaderboard with or without the current player
   if (len(leader_scores_list) < 5 or score >= leader_scores_list[4]):
     lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
     lb.draw_leaderboard(True, leader_names_list, leader_scores_list, fish, score)
   else:
     lb.draw_leaderboard(False, leader_names_list, leader_scores_list, fish, score)
+    
+def right_key():
+  fish.setheading(0)
+  fish.forward(15)
+def left_key():
+  fish.setheading(180)
+  fish.forward(15)
 
 
 #-----other events-------------
+wn.listen()
+wn.onkeypress(right_key, "Right")
+wn.onkeypress(left_key, "Left")
+
 wn.ontimer(countdown, counter_interval) 
 game()
 
