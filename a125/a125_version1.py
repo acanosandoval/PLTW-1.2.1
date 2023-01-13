@@ -15,6 +15,7 @@ leaderboard_file_name = "a125/125_leaderboard.txt"
 player_name = input("Player name: ")
 
 wn = trtl.Screen()
+wn.setup(width=1.0, height=1.0)
 
 #-----background color----
 wn.bgcolor("forest green")
