@@ -7,8 +7,16 @@ password = input("Enter password:")
 print("Analyzing a one-word password ...")
 time_start = time.time()
 
-# attempt to find password
+'''# attempt to find a one word password
 found, num_guesses = pwa.one_word(password)
+time_end = time.time()'''
+
+'''# attempt to find a two word password
+found, num_guesses = pwa.two_word(password)
+time_end = time.time()'''
+
+# attempt to find a two word password with digit
+found, num_guesses = pwa.two_words_and_digit(password)
 time_end = time.time()
 
 # report results
