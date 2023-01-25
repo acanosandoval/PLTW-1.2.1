@@ -37,16 +37,16 @@ def two_word(password):
 
 def two_words_and_digit(password):
   words = get_dictionary()
-  nums = "1234567890"
+  nums = range(10)
   guesses = 0
   # get each word from the dictionary file
   for w1 in words:
     for w2 in words:
         for d1 in nums:
           for d2 in nums:
+            guesses +=  1
+            phrase = d1 + w1 + w2 + d2
             print("Guessing...", phrase)
-          phrase = d1 + w1 + w2 + d2
-      guesses +=  1
-      if (phrase == password):
-        return True, guesses
+            if (phrase == password):
+              return True, guesses
   return False, guesses
