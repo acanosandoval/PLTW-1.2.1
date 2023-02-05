@@ -6,12 +6,12 @@ ent_user = input("Enter your username: " )
 if (len(ent_user)<8) or (len(ent_user)>24):
     print("Invalid username; must be 8-24 characters long.")
     ent_user = input("Enter a new username: " )
-else:
-    print("good username")
 
-while not ent_user.isdigit():
+elif not ent_user.isalpha():
     print("Invalid username; must include both letters and numbers.")
     ent_user = input("Enter a new username: " )
+    
+print("YYYYEA")
 
 ent_password = input("Enter your password: " )
 
