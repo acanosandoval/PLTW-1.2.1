@@ -100,4 +100,3 @@ class MultiFactorAuth(tk.Tk):
         self.frame_restrict.tkraise()
     else:
         mb.showinfo("Authentication","We're sorry, but our records do not match your entry.")
-
