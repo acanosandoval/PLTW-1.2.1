@@ -19,7 +19,7 @@ def monitor():
       mesg = "Average temperature too warm!"
     
   except:
-    print("Unexpected error")
+    print("Unexpected temp error")
 
   return mesg
 

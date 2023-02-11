@@ -16,7 +16,7 @@ def monitor():
       mesg = "Magnesium level too high!"
     
   except:
-    print("Unexpected error")
+    print("Unexpected magnesium error")
 
   return mesg
 

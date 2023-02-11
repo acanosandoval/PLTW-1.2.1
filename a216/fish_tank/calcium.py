@@ -12,7 +12,7 @@ def monitor():
       mesg = "Calcium level  too high!"
     
   except:
-    print("Unexpected error")
+    print("Unexpected calcium error")
 
   return mesg
   

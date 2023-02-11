@@ -15,7 +15,7 @@ def monitor():
       mesg = "Alkalinity too high!"
     
   except:
-    print("Unexpected error") 
+    print("Unexpected alkalinity error") 
     
   return mesg
 
