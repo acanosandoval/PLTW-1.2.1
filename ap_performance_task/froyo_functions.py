@@ -35,7 +35,7 @@ def get_sales(file_name):
     
     # gets the sales of the flavor
     while (line[index] != "\n"):
-      flavor_sales = flavor_sales + line[index] 
+      flavor_sales = flavor_sales + line[index]
       index = index + 1
 
     # adds the sales of that flavor to the sales list
