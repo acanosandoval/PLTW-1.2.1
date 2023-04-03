@@ -44,3 +44,6 @@ def get_sales(file_name):
   sales_file.close()
 
   return sales
+
+# finds the percent change in sales of a flavor between two years
+'''def sales_percent_change(year1, ye'''
