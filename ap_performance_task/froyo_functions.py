@@ -52,6 +52,7 @@ def sales_percent_change(names, year1_sales, year2_sales):
     single_flavor_year1_sales = year1_sales.pop()
     single_flavor_year2_sales = year2_sales.pop()
     pcnt_change = int(((single_flavor_year2_sales/single_flavor_year1_sales)*100)-100)
-    print("The percent change for", single_flavor, "is", pcnt_change,"%")
-    if pcnt_change > 40:
-      
+    if pcnt_change > 0:
+      print(f"{single_flavor} sales are up by {pcnt_change}%")
+    else:
+      print(f"{single_flavor} sales are down by {pcnt_change}%")
