@@ -47,11 +47,21 @@ def get_sales(file_name):
 
 # finds the percent change in sales of each flavor between two years
 def sales_percent_change(names, year1_sales, year2_sales):
+  pcnt_list = []
   while len(names) > 0:
     single_flavor = names.pop()
     single_flavor_year1_sales = year1_sales.pop()
     single_flavor_year2_sales = year2_sales.pop()
     pcnt_change = int(((single_flavor_year2_sales/single_flavor_year1_sales)*100)-100)
+    pcnt_list.append(pcnt_change)
     print("The percent change for", single_flavor, "is", pcnt_change,"%")
-    if pcnt_change > 40:
-      
+  return pcnt_list
+
+# evaluates the flavor's change in sales as an increase or decrease
+def inc_or_dec_check(pcnt_chnge, name):
+  if pcnt_chnge > 20:
+    print("Increase your stock of", name, "frozen yogurt.")
+  elif pcnt_chnge < -20:
+    print("Decrease your stock of", name, "frozen yogurt.")
+  else:
+    print("Keep the current stock of", name, "frozen yogurt.")
