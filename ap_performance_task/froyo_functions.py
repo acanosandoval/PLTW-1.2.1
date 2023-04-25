@@ -57,7 +57,7 @@ def sales_percent_change(names, year1_sales, year2_sales):
     print("The percent change for", single_flavor, "is", pcnt_change,"%")
   return pcnt_list
 
-# evaluates the flavor's change in sales as an increase or decrease
+# suggests an increase, decrease, or no change of stock of yogurt based on sales changes
 def inc_or_dec_check(pcnt_chnge, name):
   if pcnt_chnge > 20:
     print("Increase your stock of", name, "frozen yogurt.")
