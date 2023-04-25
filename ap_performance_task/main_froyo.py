@@ -17,6 +17,7 @@ pcnts = froyo_func.sales_percent_change(all_flavor_names, all_flavor_sales_2016,
 
 # displays whether a flavor stock should be increased, decreased, or kept at the current rate based on the sales data
 all_flavor_names = froyo_func.get_flavors(data_2016)
+pcnts.reverse()
 for n in all_flavor_names_perm:
     current_flavor_check = all_flavor_names.pop()
     current_pcnt_check = pcnts.pop()
